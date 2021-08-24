@@ -28,7 +28,7 @@
     }
 
 </p>
-<table class="table">
+<table class="table table-hover table-sm">
     <thead>
         <tr>
             <th>#</th>
@@ -44,24 +44,12 @@
         @foreach (var item in Model.Users)
         {
             <tr>
-                <td>
-                    @index @{ index++;}
-                </td>
-                <td>
-                    @Html.DisplayFor(model => item.Name)
-                </td>
-                <td>
-                    @Html.DisplayFor(model => item.Sex)
-                </td>
-                <td>
-                    @Html.DisplayFor(model => item.Race)
-                </td>
-                <td>
-                    @Html.DisplayFor(model => item.GameCount)
-                </td>
-                <td>
-                    @Html.DisplayFor(model => item.WinRate)
-                </td>
+                <td>@index @{ index++;}</td>
+                <td>@Html.DisplayFor(model => item.Name)</td>
+                <td>@Html.DisplayFor(model => item.Sex)</td>
+                <td>@Html.DisplayFor(model => item.Race)</td>
+                <td>@Html.DisplayFor(model => item.GameCount)</td>
+                <td>@Html.DisplayFor(model => item.WinRate)</td>
             </tr>
         }
     </tbody>
