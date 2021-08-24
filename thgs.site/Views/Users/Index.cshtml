@@ -1,48 +1,68 @@
-﻿@model IEnumerable<thgs.database.Models.User>
+﻿@model thgs.site.Models.UsersViewModel
 
 @{
     ViewData["Title"] = "Index";
+
+    // индекс записи в таблице
+    var index = (Model.PagePaginationModel.PageNumber - 1) * 1000 + 1;
 }
 
-@*<h2>Index</h2>
+<p>
+    @if (Model.PagePaginationModel.HasPreviousPage)
+    {
+        <a asp-action="Index"
+           asp-route-page="@(Model.PagePaginationModel.PageNumber - 1)"
+           class="btn btn-outline-dark">
+            <i class="glyphicon glyphicon-chevron-left"></i>
+            Назад
+        </a>
+    }
+    @if (Model.PagePaginationModel.HasNextPage)
+    {
+        <a asp-action="Index"
+           asp-route-page="@(Model.PagePaginationModel.PageNumber + 1)"
+           class="btn btn-outline-dark">
+            Вперед
+            <i class="glyphicon glyphicon-chevron-right"></i>
+        </a>
+    }
 
-    <p>
-        <a asp-action="Create">Create New</a>
-    </p>
-    <table class="table">
-        <thead>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Имя</th>
+            <th>Пол</th>
+            <th>Расса</th>
+            <th>Кол-во игр</th>
+            <th>Побед/Поражений</th>
+        </tr>
+    </thead>
+    <tbody>
+          
+        @foreach (var item in Model.Users)
+        {
             <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.UserInfo.Name)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.UserInfo.Sex)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.UserInfo.BirthDate)
-                </th>
-                <th></th>
+                <td>
+                    @index @{ index++;}
+                </td>
+                <td>
+                    @Html.DisplayFor(model => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => item.Sex)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => item.Race)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => item.GameCount)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => item.WinRate)
+                </td>
             </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model)
-            {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.UserInfo.Name)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.UserInfo.Sex)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.UserInfo.BirthDate)
-                    </td>
-                    <td>
-                        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                        <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>*@
+        }
+    </tbody>
+</table>
