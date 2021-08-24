@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,6 +8,7 @@ using thgs.database;
 
 namespace thgs.site.Controllers
 {
+    //[Authorize]
     public class ProfileController : Controller
     {
         private readonly ThgsDbContext _context;
@@ -20,5 +22,15 @@ namespace thgs.site.Controllers
         {
             return View();
         }
+
+        //public ActionResult Login()
+        //{
+        //    return View();
+        //}
+
+        //public ActionResult Logout()
+        //{
+        //    return View();
+        //}
     }
 }
